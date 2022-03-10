@@ -1,16 +1,20 @@
+import { useAppDispatch } from "app/hooks";
 import { useForm } from "react-hook-form";
 
 import AnchorLink from "shared/AnchorLink";
 import FormTemplate from "shared/FormTemplate";
 import InputErrorMessage from "shared/InputErrorMessage";
 import PrimaryButton from "shared/PrimaryButton";
+import { LoginDto } from "./interface";
+import { login } from "./loginSlice";
 
 export const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const dispatch = useAppDispatch();
 
-    const onSubmit = (data: object) => {
+    const onSubmit = (data: any) => {
         console.log({data});
-        
+        dispatch(login(data as LoginDto));
     }
 
     return <FormTemplate>
