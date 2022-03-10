@@ -4,7 +4,7 @@ import { LoginService } from './login.service';
 import { LoginDto } from './interface';
 
 type LoginState = {
-    isFetching: boolean,
+    isLoading: boolean,
     isError: boolean,
     message: string,
     isSuccess: boolean,
@@ -12,7 +12,7 @@ type LoginState = {
 }
 
 const initialState: LoginState = {
-    isFetching: false,
+    isLoading: false,
     isError: false,
     message: '',
     isSuccess: false
@@ -25,7 +25,7 @@ const loginSlice = createSlice({
         loginRequest: (state) =>{
             return {
                 ...state,
-                isFetching: true,
+                isLoading: true,
                 isError: false,
                 isSuccess: false,
                 message: ''
@@ -34,7 +34,7 @@ const loginSlice = createSlice({
         loginSuccess: (state, action: PayloadAction<any>) =>{
             return {
                 ...state,
-                isFetching: false,
+                isLoading: false,
                 isError: false,
                 isSuccess: true,
                 message: 'Login Success',
@@ -44,7 +44,7 @@ const loginSlice = createSlice({
         loginFailure: (state, action: PayloadAction<any>) =>{
             return {
                 ...state,
-                isFetching: false,
+                isLoading: false,
                 isError: true,
                 isSuccess: false,
                 message: action.payload.message
