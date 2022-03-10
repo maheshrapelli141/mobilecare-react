@@ -1,4 +1,4 @@
-import { useAppDispatch } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useForm } from "react-hook-form";
 
 import AnchorLink from "shared/AnchorLink";
@@ -11,6 +11,7 @@ import { login } from "./loginSlice";
 export const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useAppDispatch();
+    const loginState = useAppSelector(state => state.login);
 
     const onSubmit = (data: any) => {
         console.log({data});
@@ -20,6 +21,7 @@ export const Login = () => {
     return <FormTemplate>
     <h1>Agnity Mobile Care</h1>
     <h3>Login to continue the Mobile Care</h3>
+    {loginState.isError && <p>{loginState.message}</p>}
     <form onSubmit={handleSubmit((data,e) => {e?.preventDefault(); onSubmit(data);})}>
         <label>Username</label>
         <input type="text" {...register('username',{ required: 'Enter Username'})} />
