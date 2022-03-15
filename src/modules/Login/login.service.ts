@@ -1,32 +1,19 @@
+import axios from "axios";
 import api from "utils/Api";
 import { LoginDto } from "./interface";
 
+const serialize = function(obj: any) {
+  var str = [];
+  for (var p in obj)
+    if (obj.hasOwnProperty(p)) {
+      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+    }
+  return str.join("&");
+}
+
 export const LoginService = {
     login: async (data: LoginDto) => {
-        const resp = await api.post('/auth/login',{
-            'message-body': {
-              'agreement-status': 0,
-              'app-mode': 0,
-              'app-ver': 1,
-              'device-id': '1c0083b5-b51d-46f1-b609-e465ee0d0d0e',
-              'device-identifier': '1c0083b5-b51d-46f1-b609-e465ee0d0d0e',
-              'device-name': 'TeamsFX',
-              device_type: 'ANDROID',
-              'forced-login': 1,
-              'is-reauthenticate': 0,
-              password: 'Abcd@1234',
-              start_persistent_connection: false,
-              'user-name': 'harryburns@vpzqtsolv.onmicrosoft.com'
-            },
-            'message-expiry-date': 1646826383355,
-            'message-id': '1646825783355.UNUSED',
-            'message-priority': 'P1',
-            'message-timestamp': 1646825783355,
-            'message-type': 'authentication',
-            'message-ver': '1.0',
-            'account-no': 7,
-            'message-from': 'harryburns@vpzqtsolv.onmicrosoft.com'
-          });
+        const resp = await axios.get(`https://ahidemo02.agnityhealthcare.com/commonprov/Device?jsonRequest={"account-no":"7","message-body":{"device-id":"WEB_12415","device-identifier":"WEB","device-name":"WEB","device_type":"WEB","is-reauthenticate":"0","start_persistent_connection":"false","user-name":"amitg@vpzqtsolv.onmicrosoft.com", "password":"2222"	},"message-from":"amitg@vpzqtsolv.onmicrosoft.com","message-id":null,"message-priority":null,"message-type":"authentication","message-ver":"1.0"}`);
         return resp;
     }
 };

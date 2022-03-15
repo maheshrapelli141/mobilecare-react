@@ -5,6 +5,7 @@ import Lazy from "shared/Lazy";
 const LazyRegisterYourDomain = <Lazy element={React.lazy(() => import('modules/RegisterYourDomain'))} />;
 const LazyLogin = <Lazy element={React.lazy(() => import('modules/Login'))} />;
 const LazyForgotPassword = <Lazy element={React.lazy(() => import('modules/ForgotPassword'))} />;
+const LazyMyPatients = <Lazy element={React.lazy(() => import('modules/MyPatients'))} />;
 
 const Router = () => (
   <BrowserRouter>
@@ -12,6 +13,7 @@ const Router = () => (
       <Route index element={LazyRegisterYourDomain} />
       <Route path="/login" element={LazyLogin} />
       <Route path="/forgot-password" element={LazyForgotPassword} />
+      <Route path="/my-patients" element={LazyMyPatients} />
     </Routes>
   </BrowserRouter>
 );

@@ -1,22 +1,28 @@
+import { useAppDispatch, useAppSelector } from "app/hooks";
 import { useForm, Controller } from "react-hook-form";
 
 import AnchorLink from "shared/AnchorLink";
 import FormTemplate from "shared/FormTemplate";
 import InputErrorMessage from "shared/InputErrorMessage";
 import PrimaryButton from "shared/PrimaryButton";
+import { forgotPassword } from "./forgotPasswordSlice";
+import { ForgotPasswordDto } from "./interface";
 
 export const ForgotPassword = () => {
     const { control, register, handleSubmit, formState: { errors } } = useForm();
+    const dispatch = useAppDispatch();
+    const forgotPasswordState = useAppSelector(state => state.forgotPassword);
 
     const onSubmit = (data: object) => {
         console.log({data});
-        
+        dispatch(forgotPassword(data as ForgotPasswordDto));
     }
     console.log({errors});
     
     return <FormTemplate>
     <h1>Forgot Password</h1>
     <h3>Don't worry! It Happens. Please enter below Details</h3>
+    {forgotPasswordState.isError && <p>{forgotPasswordState.message}</p>}
     <form onSubmit={handleSubmit((data,e) => {e?.preventDefault(); onSubmit(data);})}>
         <label>Security Question</label>
         <Controller
