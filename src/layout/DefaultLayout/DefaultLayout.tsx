@@ -1,6 +1,7 @@
 import Footer from "../../core/Footer"
 import Header from "../../core/Header"
 import Sidebar from "../../core/Sidebar"
+import './style.css';
 
 type Props  = React.PropsWithChildren<{}>;
 
@@ -10,8 +11,10 @@ export const DefaultLayout = ({
     return (
         <>
             <Header />
-            <Sidebar />
-            {children}
+            <div className="content-section">
+                <Sidebar />
+                {children}
+            </div>
             <Footer />
         </>
     )

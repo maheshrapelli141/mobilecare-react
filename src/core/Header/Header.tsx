@@ -1,7 +1,7 @@
 import './style.css';
 
 export const Header = () => {
-    return <nav>
+    return <><nav className='header'>
         <div className='logo-section'>
             <img src='https://agnityglobal.com/wp-content/uploads/2016/01/agnity_logo_1_lg200.png' alt='logo' height="36px" />
         </div>
@@ -23,5 +23,7 @@ export const Header = () => {
         </div>
         </div>
     
-    </nav>;
+    </nav>
+    {/* <div className='empty-header'></div> */}
+    </>;
 };
