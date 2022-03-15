@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 type Props = {
     imgSrc: string,
@@ -18,8 +19,9 @@ export const GridCard = ({
     isStarred,
     isFlagged
 }: Props) => {
+    const [src,setSrc] = useState(imgSrc);
     return <div>
-        <img src={imgSrc} height="100%" width="50px" alt={name} />
+        <img src={src} height="100%" width="50px" alt={name} onError={() => setSrc('https://cdn-icons-png.flaticon.com/512/147/147140.png')} />
         <div className="details">
             <h4>{name}</h4>
             <p>{age} | {gender}</p>

@@ -1,14 +1,11 @@
+import { useAppSelector } from 'app/hooks';
 import { useState } from 'react';
 import GridView from 'shared/GridView';
 import './style.css';
 
-type Props = {
-    patients?: Array<any>
-};
 
-export const PatientsList = ({
-    patients
-}: Props) => {
+export const PatientsList = () => {
+    const { patients, isError, isLoading, isSuccess } = useAppSelector(state => state.patients);
     const [selfActiveTab,switchTab] = useState(true);
 
     const switchToSelfTab = () => switchTab(true);
