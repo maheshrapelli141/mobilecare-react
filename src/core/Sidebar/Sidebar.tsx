@@ -11,7 +11,10 @@ export const Sidebar = () => <nav className='sidebar'>
             Contacts
         </li>
         <li>
-            <img src="https://img.icons8.com/ios-filled/50/000000/document--v1.png" height="18px" alt="icon"/>
+            {/* <img src="https://img.icons8.com/ios-filled/50/000000/document--v1.png" /> */}
+            <img src="https://img.icons8.com/material-outlined/24/000000/document--v1.png" height="18px" alt="icon" />
+
+
             My Patients
         </li>
         <li>
