@@ -19,3 +19,12 @@ nav.sidebar{
     padding: 0px 10px;
     margin: 5px 0px;
 }
+.sidebar li.active {
+    border-left: 4px solid #1E6CE4;
+}
+.sidebar li a {
+    color: #a19d9d;
+}
+.sidebar li.active a {
+    color: #1E6CE4;
+}

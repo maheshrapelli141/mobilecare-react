@@ -2,6 +2,7 @@ import ProtectedRoute from "core/ProtectedRoute";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Lazy from "shared/Lazy";
+import { ROUTESCONTANTS } from "./routes.contants";
 
 const LazyRegisterYourDomain = <Lazy element={React.lazy(() => import('modules/RegisterYourDomain'))} />;
 const LazyLogin = <Lazy element={React.lazy(() => import('modules/Login'))} />;
@@ -12,10 +13,10 @@ const Router = () => (
   <BrowserRouter>
     <Routes>
       <Route index element={LazyRegisterYourDomain} />
-      <Route path="/login" element={LazyLogin} />
-      <Route path="/forgot-password" element={LazyForgotPassword} />
-      <Route path="/" element={<ProtectedRoute />}>
-      <Route path="/my-patients" element={LazyMyPatients} />
+      <Route path={ROUTESCONTANTS.LOGIN} element={LazyLogin} />
+      <Route path={ROUTESCONTANTS.FORGOT_PASSWORD} element={LazyForgotPassword} />
+      <Route path={ROUTESCONTANTS.DEFAULT} element={<ProtectedRoute />}>
+        <Route path={ROUTESCONTANTS.MY_PATIENTS} element={LazyMyPatients} />
       </Route>
       
     </Routes>
