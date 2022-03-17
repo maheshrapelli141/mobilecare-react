@@ -1,5 +1,7 @@
 import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import AnchorLink from "shared/AnchorLink";
 import FormTemplate from "shared/FormTemplate";
@@ -11,17 +13,27 @@ import { login } from "./loginSlice";
 export const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const loginState = useAppSelector(state => state.login);
 
-    const onSubmit = (data: any) => {
-        console.log({data});
-        dispatch(login(data as LoginDto));
+    useEffect(() => {
+        if(loginState.isSuccess) {
+            setTimeout(() => {
+                navigate('/my-patients');
+            },2000);
+        }
+    },[loginState.isSuccess,navigate]);
+
+    const onSubmit = async (data: any) => {
+        // data['forced-login'] = 1;
+        await dispatch(login(data as LoginDto));
     }
 
     return <FormTemplate>
     <h1>Agnity Mobile Care</h1>
     <h3>Login to continue the Mobile Care</h3>
-    {loginState.isError && <p>{loginState.message}</p>}
+    {loginState.message.length ? <p>{loginState.message}</p> : null}
     <form onSubmit={handleSubmit((data,e) => {e?.preventDefault(); onSubmit(data);})}>
         <label>Username</label>
         <input type="text" {...register('username',{ required: 'Enter Username'})} />

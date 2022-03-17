@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from 'global.interface';
 import { LoginService } from './login.service';
 import { LoginDto } from './interface';
+import GLOBALCONSTANTS from 'global.constants';
 
 type LoginState = {
     isLoading: boolean,
@@ -57,11 +58,20 @@ export const { loginRequest, loginSuccess, loginFailure } = loginSlice.actions;
 
 export default loginSlice.reducer;
 
-export const login = ({username,password} : LoginDto) => async (dispatch: any) => {
+export const login = (data : LoginDto) => async (dispatch: any) => {
     try {
         dispatch(loginRequest());
-        const data = await LoginService.login({ username, password });
-        dispatch(loginSuccess(data));
+        const resp: any = await LoginService.login(data);
+        if(resp && resp['message-body'] ){
+            if(resp['message-body']['status'] === 'success'){
+                localStorage.setItem(GLOBALCONSTANTS.USER_KEY,JSON.stringify(resp['message-body']));
+                dispatch(loginSuccess({user: resp['message-body']}));
+            } else {
+                dispatch(loginFailure({message: resp['message-body']['current-status-reason']}))
+            }
+        } else {
+            dispatch(loginFailure({ message: 'Unable to handle request, please try again later'}));
+        }
     } catch (error: any) {
         dispatch(loginFailure({message: error.message}))
     }
